@@ -10,17 +10,17 @@
 #include <vector>
 #include <codecvt>  // Add this include for std::wstring_convert
 
-class StringConversion {
-public:
-    static std::string wstringToString(const std::wstring& wstr);
-};
+//class StringConversion {
+//public:
+//    static std::string wstringToString(const std::wstring& wstr);
+//};
 
 class UIDGenerator {
 public:
     static bool GenerateAndWriteUID();
 
 private:
-    static std::wstring generateSHA256Hash(const std::string& input);
+    //static std::wstring generateSHA256Hash(const std::string& input);
     static std::wstring readHashFromRegistry();
     static bool writeHashToRegistry(const std::wstring& hash);
     static bool keyExists(HKEY hKey, LPCWSTR subKey);

@@ -24,12 +24,18 @@
     <ClCompile Include="PasswordHandling.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HashGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GenerateUID.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PasswordHandling.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HashGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
