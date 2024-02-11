@@ -128,12 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GenerateUID.cpp" />
+    <ClCompile Include="GetProdID.cpp" />
     <ClCompile Include="HashGenerator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PasswordHandling.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GenerateUID.h" />
+    <ClInclude Include="GetProdID.h" />
     <ClInclude Include="HashGenerator.h" />
     <ClInclude Include="PasswordHandling.h" />
   </ItemGroup>
