@@ -9,6 +9,9 @@
 #include <string>
 #include <vector>
 #include <codecvt>  // Add this include for std::wstring_convert
+#include <windows.h>
+#include <devicetopology.h>
+
 
 //class StringConversion {
 //public:
@@ -21,6 +24,7 @@ public:
 
 private:
     //static std::wstring generateSHA256Hash(const std::string& input);
+    static HRESULT YourFunctionUsingGetDeviceId(IDeviceTopology* pDeviceTopology);
     static std::wstring readHashFromRegistry();
     static bool writeHashToRegistry(const std::wstring& hash);
     static bool keyExists(HKEY hKey, LPCWSTR subKey);
