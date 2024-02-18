@@ -1,4 +1,5 @@
 #include "GenerateUID.h"
+#include "PasswordHandling.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -18,11 +19,22 @@ int startApplication() {
 
     if (UIDGenerator::GenerateAndWriteUID()) {
         std::cout << "UID verified" << std::endl;
+
+        PasswordHandler passwordHandler;
+
+        if (passwordHandler.HandlePasswordLogic()) {
+            std::cout << "Password verified" << std::endl;
+
+        }
+        //else {
+        //    std::cout << "Invalid Password Settings" << std::endl;
+        //}
     }
     else {
         std::cerr << "UID not matching" << std::endl;
         return 1; // Return an error code or handle accordingly
     }
+
 }
 
 int main() {

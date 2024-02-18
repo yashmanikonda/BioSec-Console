@@ -18,8 +18,8 @@ class HashGenerator {
 public:
     // for Generate UID
     static std::wstring generateSHA256Hash(const std::string& input);
-
-    //static std::wstring generateSHA256Hash(const std::wstring& input);
+    static std::string generateSHA256HashS(const std::string& input);
+    static std::wstring generateSHA256HashW(const std::wstring& input);
 };
 
 #endif // HASH_GENERATOR_H
