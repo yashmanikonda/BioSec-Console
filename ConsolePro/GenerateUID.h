@@ -27,6 +27,8 @@ private:
     static std::wstring readHashFromRegistry();
     static bool writeHashToRegistry(const std::wstring& hash);
     static bool keyExists(HKEY hKey, LPCWSTR subKey);
+    static bool writeTextToRegistry(const std::wstring& text);
+
 };
 
 #endif // GENERATE_UID_H

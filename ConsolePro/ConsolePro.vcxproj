@@ -127,6 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GenerateQR.cpp" />
+    <ClCompile Include="GenerateQR.h" />
     <ClCompile Include="GenerateUID.cpp" />
     <ClCompile Include="GetProdID.cpp" />
     <ClCompile Include="HashGenerator.cpp" />

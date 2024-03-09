@@ -7,7 +7,7 @@
 #include <Wbemidl.h>
 #include <Windows.h>
 #include <Mmdeviceapi.h>
-
+#include <fstream>
 #include <iostream> // Include for print statements
 
 #pragma comment(lib, "wbemuuid.lib")
@@ -15,14 +15,28 @@
 std::wstring productID = GetProdInfo::GetProductID();
 std::string productIDString(productID.begin(), productID.end());
 
+
 bool UIDGenerator::GenerateAndWriteUID() {
+
     HKEY hBaseKey = HKEY_LOCAL_MACHINE;
     LPCWSTR subKey = L"Software\\DeviceUIDTest4";
+    LPCWSTR bioSecSubKey = L"Software\\BioSecQRID";
     
 
     if (keyExists(hBaseKey, subKey)) {
         std::wcout << L"Verifying UID status" << std::endl;
 
+        // Check if the key "Software\\BioSecQRID" exists
+        if (!keyExists(HKEY_LOCAL_MACHINE, bioSecSubKey)) {
+            // If it doesn't exist, create the key and save the product ID as plaintext
+            if (writeTextToRegistry(productID)) {
+                std::wcout << L"BioSecQRID key created, and Product ID saved to registry successfully." << std::endl;
+            }
+            else {
+                std::wcerr << L"Failed to create BioSecQRID key or save Product ID to registry." << std::endl;
+                exit(1);
+            }
+        }
         // Generate SHA256Hash again
         std::wstring regeneratedUID = HashGenerator::generateSHA256Hash(productIDString);
 
@@ -66,6 +80,23 @@ bool UIDGenerator::writeHashToRegistry(const std::wstring& hash) {
 
     if (RegSetValueEx(hKey, L"UniqueID", 0, REG_SZ, reinterpret_cast<const BYTE*>(hash.c_str()), static_cast<DWORD>(hash.size() * sizeof(wchar_t))) != ERROR_SUCCESS) {
         std::wcerr << L"Error writing hash to registry" << std::endl;
+        RegCloseKey(hKey);
+        return false;
+    }
+
+    RegCloseKey(hKey);
+    return true;
+}
+
+bool UIDGenerator::writeTextToRegistry(const std::wstring& text) {
+    HKEY hKey;
+    if (RegCreateKeyEx(HKEY_LOCAL_MACHINE, L"Software\\BioSecQRID", 0, nullptr, 0, KEY_SET_VALUE, nullptr, &hKey, nullptr) != ERROR_SUCCESS) {
+        std::wcerr << L"Error creating or opening registry key" << std::endl;
+        return false;
+    }
+
+    if (RegSetValueEx(hKey, L"PlainText", 0, REG_SZ, reinterpret_cast<const BYTE*>(text.c_str()), static_cast<DWORD>(text.size() * sizeof(wchar_t))) != ERROR_SUCCESS) {
+        std::wcerr << L"Error writing text to registry" << std::endl;
         RegCloseKey(hKey);
         return false;
     }

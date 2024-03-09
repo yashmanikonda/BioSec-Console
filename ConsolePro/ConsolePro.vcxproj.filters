@@ -30,6 +30,12 @@
     <ClCompile Include="GetProdID.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GenerateQR.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GenerateQR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GenerateUID.h">
